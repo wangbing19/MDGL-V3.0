@@ -10,6 +10,6 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain=true) //链式加载
 public class BasePojo implements Serializable{
-	private Date gmtCreate;
-	private Date gmtModified;
+	private Date gmtCreate; //创建时间
+	private Date gmtModified; //修改时间
 }

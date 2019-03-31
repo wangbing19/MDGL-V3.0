@@ -8,17 +8,23 @@ import lombok.Data;
 
 @Data
 @TableName(value="ppo_appointment")
+/**
+ * 封装医师表数据
+ * @author Administrator
+ *
+ */
 public class Appointment extends BasePojo{
 	@TableId(type=IdType.AUTO)
-	private Long id;
-	private String trainerName;
-	private String gender;
-	private String tel;
-	private String post;
-	private String description;
-	private String resume;
-	private Long userId;
-	private String userName;
+	private Long id; 
+	private String trainerName; //训练师姓名
+	private String gender; //性别
+	private String tel; //电话
+	private String post; //职位
+	private String description; //描述
+	private String resume; //简历
+	private Long shopId; //子门店id
+	private String shopParentId; //父门店id
+
 	
 	
 
