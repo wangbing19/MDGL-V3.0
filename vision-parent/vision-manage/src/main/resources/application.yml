@@ -15,7 +15,7 @@ spring:
 #mybatis-plush配置
 mybatis-plus:
   type-aliases-package: com.vs.cus.pojo    #别名包
-  mapper-locations: classpath:/mybatis/mappers/*.xml
+  mapper-locations: classpath:/mybatis/mappers/*/*.xml
   #开启驼峰映射
   configuration:
     map-underscore-to-camel-case: true

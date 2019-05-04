@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.vs.cus.mapper.CusScheduleMapper">
+<mapper namespace="com.vision.mapper.cus.CusScheduleMapper">
 	
 	<!-- 基于用户名的查询条件sql引用语句 -->
 	<sql id="queryWhereId">
@@ -25,7 +25,7 @@
 	
 	<!-- 基于用户姓名及分页条件查询,无用户名输入基于分页条件查询 -->
 	<select id="findPageObjects"
-		resultType="com.vs.vision.pojo.cus.CusSchedule">
+		resultType="com.vision.pojo.cus.CusSchedule">
 		select *
 		from cus_schedule
 		<include refid="queryWhereId" /> 

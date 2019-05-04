@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.vs.cus.mapper.CusCustomerMapper">
+<mapper namespace="com.vision.mapper.cus.CusCustomerMapper">
 
 	<!-- 基于用户名的查询条件sql引用语句 -->
 	<sql id="queryWhereId">
@@ -33,7 +33,7 @@
 	
 	<!-- 关联查询 -->
 	<resultMap id="cusCustomerMap"
-		type="com.vs.vision.pojo.cus.CusCustomer">
+		type="com.vision.pojo.cus.CusCustomer">
 		<id column="id" property="id"/>
 		<!-- 关联查询充值记录数 -->
 		<!-- <association property="rechargeCount"
@@ -43,7 +43,7 @@
 		<!-- 关联查询课程记录数 -->
 		<association property="scheduleCount"
 					 column="id"
-					 select="com.vs.cus.mapper.CusScheduleMapper.findByCustomerId">
+					 select="com.vision.mapper.cus.CusScheduleMapper.findByCustomerId">
 		</association>
 		<!-- 关联查询上次训练时间 -->
 		<!-- <association property="lastTrain"

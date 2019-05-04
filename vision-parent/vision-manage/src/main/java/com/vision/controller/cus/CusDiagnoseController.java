@@ -22,8 +22,10 @@ public class CusDiagnoseController {
 	/**诊断表页面加载,查询*/
 	@RequestMapping("/findPageObjects")
 	@ResponseBody
-	public PageObject<CusDiagnose> findPageObjects(@RequestBody CusVo cusVo){
+	public PageObject<CusDiagnose> findPageObjects(CusVo cusVo){
 		try {
+			cusVo.setUserId(1);
+			cusVo.setUserParentId(0);
 			return cusDiagnoseService.findPageObjects(cusVo);
 		} catch (Exception e) {
 			System.out.println("诊断表页面加载,查询=============错误=================");
@@ -34,7 +36,7 @@ public class CusDiagnoseController {
 	/**基于咨询表id,查询相关id所有信息*/
 	@RequestMapping("/findObjectById")
 	@ResponseBody
-	public CusDiagnose findObjectById(@RequestBody Integer id) {
+	public CusDiagnose findObjectById(Integer id) {
 		try {
 			return cusDiagnoseService.findObjectById(id);
 		} catch (Exception e) {
@@ -46,7 +48,7 @@ public class CusDiagnoseController {
 	/**基于客户id查询诊断表相关信息*/
 	@RequestMapping("/findByCustomerId")
 	@ResponseBody
-	public CusDiagnose findByCustomerId(@RequestBody Integer customerId) {
+	public CusDiagnose findByCustomerId(Integer customerId) {
 		try {
 			return cusDiagnoseService.findByCustomerId(customerId);
 		} catch (Exception e) {
@@ -58,7 +60,7 @@ public class CusDiagnoseController {
 	/**基于客户id创建客户诊断表*/
 	@RequestMapping("/saveObject")
 	@ResponseBody
-	public Integer saveObject(@RequestBody CusDiagnose cusDiagnose) {
+	public Integer saveObject(CusDiagnose cusDiagnose) {
 		try {
 			return cusDiagnoseService.saveObject(cusDiagnose);
 		} catch (Exception e) {
@@ -70,7 +72,7 @@ public class CusDiagnoseController {
 	/**基于诊断表id删除数据*/
 	@RequestMapping("/deleteObject")
 	@ResponseBody
-	public Integer deleteObject(@RequestBody Integer id) {
+	public Integer deleteObject(Integer id) {
 		try {
 			return cusDiagnoseService.deleteObject(id);
 		} catch (Exception e) {

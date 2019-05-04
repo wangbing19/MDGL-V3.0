@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.vs.cus.mapper.CusDiagnoseMapper">
+<mapper namespace="com.vision.mapper.cus.CusDiagnoseMapper">
 
 	<!-- 基于用户id的查询条件sql引用语句 -->
 	<sql id="queryWhereId">
@@ -24,15 +24,15 @@
 
 	<!-- 关联查询 -->
 	<resultMap id="cusDiagnoseMap"
-		type="com.vs.vision.pojo.cus.CusDiagnose">
+		type="com.vision.pojo.cus.CusDiagnose">
 		<id column="id" property="id" />
 		<!-- 关联查询充值记录数 -->
 		<association property="customerName" column="id"
-			select="com.vs.cus.mapper.CusCustomerMapper.findNameByDiagnoseId">
+			select="com.vision.mapper.cus.CusCustomerMapper.findNameByDiagnoseId">
 		</association>
 		<!-- 关联查询充值记录数 -->
 		<association property="customerTel" column="id"
-			select="com.vs.cus.mapper.CusCustomerMapper.findTelByDiagnoseId">
+			select="com.vision.mapper.cus.CusCustomerMapper.findTelByDiagnoseId">
 		</association>
 	</resultMap>
 

@@ -24,8 +24,10 @@ public class CusScheduleController {
 	/**基于用户/电话及当前页码值条件查询课程信息*/
 	@RequestMapping("/findPageObjects")
 	@ResponseBody
-	public PageObject<CusSchedule> findPageObjects(@RequestBody CusVo cusVo){
+	public PageObject<CusSchedule> findPageObjects( CusVo cusVo){
 		try {
+			cusVo.setUserId(1);
+			cusVo.setUserParentId(0);
 			return cusScheduleService.findPageObjects(cusVo);
 		} catch (Exception e) {
 			System.out.println("基于用户/电话及当前页码值条件查询课程信息=============错误=================");
@@ -36,7 +38,7 @@ public class CusScheduleController {
 	/**基于id删除课程信息*/
 	@RequestMapping("/deleteObject")
 	@ResponseBody
-	public Integer deleteObject(@RequestBody Integer id) {
+	public Integer deleteObject( Integer id) {
 		try {
 			return cusScheduleService.deleteObject(id);
 		} catch (Exception e) {
@@ -48,7 +50,7 @@ public class CusScheduleController {
 	/**基于id查询课程信息*/
 	@RequestMapping("/findObjectById")
 	@ResponseBody
-	public CusSchedule findObjectById(@RequestBody Integer id) {
+	public CusSchedule findObjectById( Integer id) {
 		try {
 			return cusScheduleService.findObjectById(id);
 		} catch (Exception e) {
@@ -60,7 +62,7 @@ public class CusScheduleController {
 	/**创建客户课程表*/
 	@RequestMapping("/saveObject")
 	@ResponseBody
-	public Integer saveObject(@RequestBody CusSchedule cusSchedule) {
+	public Integer saveObject( CusSchedule cusSchedule) {
 		try {
 			return cusScheduleService.saveObject(cusSchedule);
 		} catch (Exception e) {
@@ -72,7 +74,7 @@ public class CusScheduleController {
 	/**修改课程表数据*/
 	@RequestMapping("/updateObject")
 	@ResponseBody
-	public Integer updateObject(@RequestBody CusSchedule cusSchedule) {
+	public Integer updateObject( CusSchedule cusSchedule) {
 		try {
 			return cusScheduleService.updateObject(cusSchedule);
 		} catch (Exception e) {
@@ -84,7 +86,7 @@ public class CusScheduleController {
 	/**基于客户id查询用户课程表信息*/
 	@RequestMapping("/findByCustomerId")
 	@ResponseBody
-	public List<CusSchedule> findByCustomerId(@RequestBody Integer customerId) {
+	public List<CusSchedule> findByCustomerId( Integer customerId) {
 		try {
 			return cusScheduleService.findByCustomerId(customerId);
 		} catch (Exception e) {
