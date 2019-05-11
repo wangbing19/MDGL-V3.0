@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vision.pojo.cus.CusSchedule;
 import com.vision.pojo.cus.vo.CusVo;
+import com.vision.pojo.sys.Users;
 import com.vision.service.cus.CusScheduleService;
+import com.vision.vo.JsonResult;
 import com.vision.vo.PageObject;
 
 
@@ -21,78 +23,120 @@ public class CusScheduleController {
 	@Autowired
 	private CusScheduleService cusScheduleService;
 	
+	
+	/**转向课程页面*/
+	@RequestMapping("/doScheduleListUI")
+	public String doScheduleListUI() {
+		return "/pages/sys/cusSchedule_list";
+	}
+	
+	/**转向课程修改页面*/
+	@RequestMapping("/doscheduleEditUI")
+	public String doscheduleEditUI() {
+		return "/pages/sys/cusSchedule_edit";
+	}
+	
+	
 	/**基于用户/电话及当前页码值条件查询课程信息*/
 	@RequestMapping("/findPageObjects")
 	@ResponseBody
-	public PageObject<CusSchedule> findPageObjects( CusVo cusVo){
+	public JsonResult findPageObjects( CusVo cusVo){
+		//获取登录用户信息
+//    	Users user = ShiroUtils.getUser();
+		//获取登录用户id及上级id
+    	cusVo.setUserId(1);
+    	cusVo.setUserParentId(0);
 		try {
-			cusVo.setUserId(1);
-			cusVo.setUserParentId(0);
-			return cusScheduleService.findPageObjects(cusVo);
+        	PageObject<CusSchedule> pageObject = cusScheduleService.findPageObjects(cusVo);
+        	if(!(pageObject.getRecords().size()==0)) {
+        		return JsonResult.oK(pageObject);
+        	}
 		} catch (Exception e) {
 			System.out.println("基于用户/电话及当前页码值条件查询课程信息=============错误=================");
 		}
-		return null;
+		return JsonResult.build(201, "查询无数据");
 	}
 	
 	/**基于id删除课程信息*/
 	@RequestMapping("/deleteObject")
 	@ResponseBody
-	public Integer deleteObject( Integer id) {
+	public JsonResult deleteObject( Integer id) {
 		try {
-			return cusScheduleService.deleteObject(id);
+			Integer rows = cusScheduleService.deleteObject(id);
+			if(rows !=0 && rows !=null) {
+				return JsonResult.oK();
+			}
 		} catch (Exception e) {
 			System.out.println("基于id删除课程信息=============错误=================");
 		}
-		return null;
+		return JsonResult.build(201, "该数据可能已经被删除");
 	}
 	
 	/**基于id查询课程信息*/
 	@RequestMapping("/findObjectById")
 	@ResponseBody
-	public CusSchedule findObjectById( Integer id) {
+	public JsonResult findObjectById( Integer id) {
 		try {
-			return cusScheduleService.findObjectById(id);
+			CusSchedule cusSchedule = cusScheduleService.findObjectById(id);
+			if(cusSchedule != null) {
+				return JsonResult.oK(cusSchedule);
+			}
 		} catch (Exception e) {
 			System.out.println("基于id查询课程信息=============错误=================");
 		}
-		return null;
+		return JsonResult.build(201, "修改查询数据错误");
 	}
 	
 	/**创建客户课程表*/
 	@RequestMapping("/saveObject")
 	@ResponseBody
-	public Integer saveObject( CusSchedule cusSchedule) {
+	public JsonResult saveObject( CusSchedule cusSchedule) {
+		//获取登录用户信息
+//    	Users user = ShiroUtils.getUser();
+		cusSchedule.setUserId(1);
+		cusSchedule.setUserParentId(0);
+		cusSchedule.setCreatedUser("admin");
+		cusSchedule.setModifiedUser("admin");
 		try {
-			return cusScheduleService.saveObject(cusSchedule);
+			Integer rows = cusScheduleService.saveObject(cusSchedule);
+			if(rows != 0 && rows != null) {
+				return JsonResult.oK();
+			}
 		} catch (Exception e) {
 			System.out.println("创建客户课程表=============错误=================");
 		}
-		return null;
+		return JsonResult.build(201, "保存数据错误,请稍后重试");
 	}
 	
 	/**修改课程表数据*/
 	@RequestMapping("/updateObject")
 	@ResponseBody
-	public Integer updateObject( CusSchedule cusSchedule) {
+	public JsonResult updateObject( CusSchedule cusSchedule) {
 		try {
-			return cusScheduleService.updateObject(cusSchedule);
+			cusSchedule.setModifiedUser("admin");
+			Integer rows = cusScheduleService.updateObject(cusSchedule);
+			if(rows != 0 && rows != null) {
+				return JsonResult.oK();
+			}
 		} catch (Exception e) {
 			System.out.println("修改课程表数据=============错误=================");
 		}
-		return null;
+		return JsonResult.build(201, "修改数据错误,请稍后重试");
 	}
 	
 	/**基于客户id查询用户课程表信息*/
 	@RequestMapping("/findByCustomerId")
 	@ResponseBody
-	public List<CusSchedule> findByCustomerId( Integer customerId) {
+	public JsonResult findByCustomerId( Integer customerId) {
 		try {
-			return cusScheduleService.findByCustomerId(customerId);
+			List<CusSchedule> list = cusScheduleService.findByCustomerId(customerId);
+			if(list.size()!=0 && list != null) {
+				return JsonResult.oK(list);
+			}
 		} catch (Exception e) {
 			System.out.println("基于客户id查询用户课程表信息=============错误=================");
 		}
-		return null;
+		return JsonResult.build(201, "该用户无课程,需添加课程信息");
 	}
 	
 }

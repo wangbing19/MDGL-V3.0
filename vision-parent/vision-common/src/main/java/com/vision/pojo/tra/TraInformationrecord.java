@@ -1,4 +1,4 @@
-package com.vision.pojo.pra;
+package com.vision.pojo.tra;
 
 import java.util.Date;
 

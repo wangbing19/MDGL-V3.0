@@ -2,8 +2,8 @@ package com.vision.service.cus;
 
 import com.vision.pojo.cus.CusCustomer;
 import com.vision.pojo.cus.vo.CusVo;
-import com.vision.pojo.pra.TraInformationrecord;
 import com.vision.pojo.rec.RecPayUser;
+import com.vision.pojo.tra.TraInformationrecord;
 import com.vision.vo.PageObject;
 
 public interface CusCustomerService {

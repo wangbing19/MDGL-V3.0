@@ -48,7 +48,7 @@
 		<!-- 关联查询上次训练时间 -->
 		<!-- <association property="lastTrain"
 					 column="id"
-					 select="com.md.sys.dao.tra.TraInformationrecordDao.findByCustomerId">
+					 select="com.vision.mapper.tra.TraInformationrecordMapper.findByCustomerId">
 		</association> -->
 	</resultMap>
 	

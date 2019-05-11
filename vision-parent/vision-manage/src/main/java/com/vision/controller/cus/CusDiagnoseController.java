@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.vision.pojo.cus.CusDiagnose;
 import com.vision.pojo.cus.vo.CusVo;
 import com.vision.service.cus.CusDiagnoseService;
+import com.vision.vo.JsonResult;
 import com.vision.vo.PageObject;
 
 
@@ -19,66 +20,105 @@ public class CusDiagnoseController {
 	@Autowired
 	private CusDiagnoseService cusDiagnoseService;
 	
+	
+	/**点击跳转用户页面*/
+	@RequestMapping("/doCusDiagnoseListUI")
+	public String doCusConsultationListUI() {
+		return "pages/sys/cusDiagnose_list";
+	}
+	
+	/**诊断表修改页面跳转*/
+	@RequestMapping("/doCusDiagnoseEditUI")
+	public String doCusDiagnoseEditUI() {
+		return "pages/sys/cusDiagnose_edit";
+	}
+	
 	/**诊断表页面加载,查询*/
 	@RequestMapping("/findPageObjects")
 	@ResponseBody
-	public PageObject<CusDiagnose> findPageObjects(CusVo cusVo){
+	public JsonResult findPageObjects(CusVo cusVo){
+		//获取登录用户信息
+//    	Users user = ShiroUtils.getUser();
+		cusVo.setUserId(1);
+		cusVo.setUserParentId(0);
 		try {
-			cusVo.setUserId(1);
-			cusVo.setUserParentId(0);
-			return cusDiagnoseService.findPageObjects(cusVo);
+			PageObject<CusDiagnose> pageObject = cusDiagnoseService.findPageObjects(cusVo);
+			if(pageObject.getRecords().size()!=0) {
+				return JsonResult.oK(pageObject);
+			}
+			
 		} catch (Exception e) {
 			System.out.println("诊断表页面加载,查询=============错误=================");
 		}
-		return null;
+		return JsonResult.build(201, "查询无数据");
 	}
 	
 	/**基于咨询表id,查询相关id所有信息*/
 	@RequestMapping("/findObjectById")
 	@ResponseBody
-	public CusDiagnose findObjectById(Integer id) {
+	public JsonResult findObjectById(Integer id) {
 		try {
-			return cusDiagnoseService.findObjectById(id);
+			CusDiagnose cusDiagnose = cusDiagnoseService.findObjectById(id);
+			if(cusDiagnose != null) {
+				return JsonResult.oK(cusDiagnose);
+			}
 		} catch (Exception e) {
 			System.out.println("基于咨询表id,查询相关id所有信息=============错误=================");
 		}
-		return null;
+		return JsonResult.build(201, "修改查询数据错误");
 	}
 	
 	/**基于客户id查询诊断表相关信息*/
 	@RequestMapping("/findByCustomerId")
 	@ResponseBody
-	public CusDiagnose findByCustomerId(Integer customerId) {
+	public JsonResult findByCustomerId(Integer customerId) {
 		try {
-			return cusDiagnoseService.findByCustomerId(customerId);
+			CusDiagnose cusDiagnose = cusDiagnoseService.findByCustomerId(customerId);
+			if(cusDiagnose != null) {
+				return JsonResult.oK(cusDiagnose);
+			} else if(cusDiagnose == null){
+				return JsonResult.build(203, "无数据,需新增数据");
+			}
 		} catch (Exception e) {
 			System.out.println("基于客户id查询诊断表相关信息=============错误=================");
 		}
-		return null;
+		return JsonResult.build(201, "修改查询数据错误");
 	}
 	
 	/**基于客户id创建客户诊断表*/
 	@RequestMapping("/saveObject")
 	@ResponseBody
-	public Integer saveObject(CusDiagnose cusDiagnose) {
+	public JsonResult saveObject(CusDiagnose cusDiagnose) {
+		//获取登录用户信息
+//    	Users user = ShiroUtils.getUser();
+		cusDiagnose.setCreatedUser("admin");
+		cusDiagnose.setModifiedUser("admin");
+		cusDiagnose.setUserId(1);
+		cusDiagnose.setUserParentId(0);
 		try {
-			return cusDiagnoseService.saveObject(cusDiagnose);
+			Integer row = cusDiagnoseService.saveObject(cusDiagnose);
+			if(row != 0 && row != null) {
+				return JsonResult.oK();
+			}
 		} catch (Exception e) {
 			System.out.println("基于客户id创建客户诊断表=============错误=================");
 		}
-		return null;
+		return JsonResult.build(201, "新增诊断表错误");
 	}
 	
 	/**基于诊断表id删除数据*/
 	@RequestMapping("/deleteObject")
 	@ResponseBody
-	public Integer deleteObject(Integer id) {
+	public JsonResult deleteObject(Integer id) {
 		try {
-			return cusDiagnoseService.deleteObject(id);
+			Integer row = cusDiagnoseService.deleteObject(id);
+			if(row != 0 && row != null) {
+				return JsonResult.oK();
+			}
 		} catch (Exception e) {
 			System.out.println("基于诊断表id删除数据=============错误=================");
 		}
-		return null;
+		return JsonResult.build(201, "数据可能已删除,请刷新");
 	}
 	
 	
