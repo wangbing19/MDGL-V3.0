@@ -2,15 +2,11 @@ package com.vision.controller.cus;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vision.pojo.cus.CusCustomer;
 import com.vision.pojo.cus.vo.CusVo;
-import com.vision.pojo.rec.RecPayUser;
-import com.vision.pojo.sys.Users;
-import com.vision.pojo.tra.TraInformationrecord;
 import com.vision.service.cus.CusCustomerService;
 import com.vision.vo.JsonResult;
 import com.vision.vo.PageObject;

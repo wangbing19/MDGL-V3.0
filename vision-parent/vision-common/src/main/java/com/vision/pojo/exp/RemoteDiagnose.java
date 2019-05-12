@@ -48,4 +48,8 @@ public class RemoteDiagnose {
     private Integer registerParentid;
     /**修改时用户的账号*/
     private String modifiedUser;
+    /**门店id*/
+    private Integer userId;
+    /**上级门店id*/
+    private Integer userParentId;
 }

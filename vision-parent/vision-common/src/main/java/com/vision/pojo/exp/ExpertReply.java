@@ -28,4 +28,8 @@ public class ExpertReply {
     private Date gmtCreate;
     /**修改时间*/
     private Date gmtModified;
+    /**门店id*/
+    private Integer userId;
+    /**上级门店id*/
+    private Integer userParentId;
 }

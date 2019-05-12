@@ -26,4 +26,8 @@ public class Expert {
     private String expertMessage;
     /**预约时间*/
     private String appointmentTime;
+    /**门店id*/
+    private Integer userId;
+    /**上级门店id*/
+    private Integer userParentId;
 }

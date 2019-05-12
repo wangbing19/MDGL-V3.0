@@ -4,8 +4,6 @@ import com.vision.pojo.cus.CusConsultation;
 import com.vision.pojo.cus.vo.CusVo;
 import com.vision.vo.PageObject;
 
-import java.util.Map;
-
 public interface CusConsultationService {
 
 	

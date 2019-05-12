@@ -1,8 +1,10 @@
-package com.vision.pojo.exp;
+package com.vision.pojo.exp.vo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.vision.pojo.exp.Expert;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -15,7 +17,6 @@ public class ExpRemoteDiagnoseVo {
     private Integer id;
 
     /**门店地址*/
-
     private String deptSite;
     /**门店名称*/
     private String deptName;
@@ -26,7 +27,7 @@ public class ExpRemoteDiagnoseVo {
     /**从专家序号中找到专家名字*/
     private Expert expert;
     /**专家回复状态0表示未回复,1表示已回复*/
-    private int valid ;
+    private Integer valid ;
     /**第几次远程诊断*/
     private Integer timeNumber;
     /**发送人姓名*/

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.alibaba.druid.util.StringUtils;
 import com.vision.exception.ServiceException;
 import com.vision.mapper.tra.TraInformationrecordMapper;
-import com.vision.pojo.cus.CusConsultation;
 import com.vision.pojo.cus.vo.CusVo;
 import com.vision.pojo.tra.TraInformationrecord;
 import com.vision.service.tra.TraInformationrecordService;
