@@ -166,16 +166,16 @@ public class CusCustomerController {
 	}
 	
 	/**基于充值记录表返回信息用户id修改金额,余额及充值次数*/
-	@RequestMapping("/updateObjectByMoney")
-	@ResponseBody
-	public Integer updateObjectByMoney( RecPayUser recPayUser) {
-		try {
-			return cusCustomerService.updateObjectByMoney(recPayUser);
-		} catch (Exception e) {
-			System.out.println("基于充值记录表返回信息用户id修改金额,余额及充值次数=============错误=================");
-		}
-		return null;
-	}
+//	@RequestMapping("/updateObjectByMoney")
+//	@ResponseBody
+//	public Integer updateObjectByMoney( RecPayUser recPayUser) {
+//		try {
+//			return cusCustomerService.updateObjectByMoney(recPayUser);
+//		} catch (Exception e) {
+//			System.out.println("基于充值记录表返回信息用户id修改金额,余额及充值次数=============错误=================");
+//		}
+//		return null;
+//	}
 	
 	/**基于训练记录表返回信息更改训练次数*/
 //	@RequestMapping("/updateObjectByTimesOfTraining")
