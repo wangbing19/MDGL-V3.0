@@ -7,10 +7,10 @@
   </parent>
   <artifactId>vision-common</artifactId>
   <dependencies>
-  	<dependency>
+<!--   	<dependency>
   		<groupId>com.vision</groupId>
   		<artifactId>vision-common</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
-  	</dependency>
+  	</dependency> -->
   </dependencies>
 </project>
